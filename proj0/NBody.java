@@ -1,17 +1,16 @@
 public class NBody{
 
-	public static int planets_number;
 
 	public static double readRadius(String args){
 		In in = new In(args);
-		planets_number = in.readInt();
+		int planets_number = in.readInt();
 		double radius = in.readDouble();
 		return radius;
 	}
 
 	public static Planet[] readPlanets(String args){
 		In in = new In(args);
-		planets_number = in.readInt();
+		int planets_number = in.readInt();
 		double radius = in.readDouble();
 		Planet[] planets_array = new Planet[planets_number];
 		for(int i = 0; i < planets_number; i += 1){
@@ -40,6 +39,7 @@ public class NBody{
 		StdDraw.picture(0, 0, "images/starfield.jpg");
 
 		// draw planets
+		int planets_number = planet.length;
 		for(int i = 0; i < planets_number; i += 1){
 			planet[i].draw();
 		}
