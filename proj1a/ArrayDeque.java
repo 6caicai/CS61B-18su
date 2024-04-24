@@ -12,19 +12,19 @@ public class ArrayDeque<T> {
     }
 
     /** Resize the ArrayDeque. */
-    public void reSize(int capacity) {
+    private void reSize(int capacity) {
         T[] tmp = (T[]) new Object[capacity];
         System.arraycopy(item, 0, tmp, 0, size);
         item = tmp;
     }
 
     /** Double size of the Array. */
-    public void inSize() {
+    private void inSize() {
         reSize(size * 2);
     }
 
     /** Decrease size of the ArrayDeque until size greater than a quarter of item length. */
-    public void deSize() {
+    private void deSize() {
         while (size < item.length / 4) {
             reSize(size / 2);
         }
@@ -39,7 +39,7 @@ public class ArrayDeque<T> {
 
         /* Move everything to one step after. */
         for (int i = size; i > 0; i--) {
-            item[i] = item[i-1];
+            item[i] = item[i - 1];
         }
 
         /* Add First. */
@@ -73,7 +73,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if (size == 0){
+        if (size == 0) {
             return null;
         } else {
             T result = item[0];
@@ -81,7 +81,7 @@ public class ArrayDeque<T> {
 
             /* Move everything foreword. */
             for (int i = 0; i < size; i++) {
-                item[i] = item[i+1];
+                item[i] = item[i + 1];
             }
 
             /* Decrease the size if needed. */

@@ -11,6 +11,7 @@ public class LinkedListDeque<T> {
 
 
 
+
     /**
      * The very FIRST element in deque.
      */
@@ -43,11 +44,11 @@ public class LinkedListDeque<T> {
     public T get(int index) {
         if (index > 0 && size > index) {
             LinkedListDeque ptr = FIRST.next;
-            for(int i = 0; i < index; i++) {
+            for (int i = 0; i < index; i++) {
                 ptr = ptr.next;
             }
             return (T) ptr.current;
-        } else{
+        } else {
             return null;
         }
     }
@@ -68,15 +69,21 @@ public class LinkedListDeque<T> {
 
     /** add item of T "T" to the first. */
     public void addFirst(T item) {
-        LinkedListDeque newNode =  new LinkedListDeque(FIRST, item, FIRST.next);
+        LinkedListDeque newNode =  new LinkedListDeque();
+        newNode.current = item;
+        newNode.next = FIRST.next;
+        newNode.prev = FIRST;
         size += 1;
         FIRST.next.prev = newNode;
         FIRST.next = newNode;
     }
 
     public void addLast(T item) {
-        LinkedListDeque newNode = new LinkedListDeque(LAST.prev, item, LAST);
+        LinkedListDeque newNode = new LinkedListDeque();
         size += 1;
+        newNode.current = item;
+        newNode.prev = LAST.prev;
+        newNode.next = LAST;
         LAST.prev.next = newNode;
         LAST.prev = newNode;
     }
@@ -116,7 +123,7 @@ public class LinkedListDeque<T> {
         LinkedListDeque tmp = this;
         if (index == 0) {
             return (T) FIRST.next.current;
-        } else{
+        } else {
             tmp = tmp.next;
             return (T) tmp.getRecursive(index - 1);
         }
