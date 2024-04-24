@@ -95,7 +95,7 @@ public class ArrayDeque<Type> {
     public Type removeLast() {
         if (size == 0) {
             return null;
-        } else{
+        } else {
             Type result = item[size];
             item[size] = null;
 
@@ -109,7 +109,7 @@ public class ArrayDeque<Type> {
     public Type get(int i) {
         if (0 < i && i < size) {
             return item[i];
-        } else{
+        } else {
             return null;
         }
     }
