@@ -44,6 +44,7 @@ public class ArrayDeque<T> {
 
         /* Add First. */
         item[0] = thing;
+        size++;
     }
 
     public void addLast(T thing) {
@@ -55,6 +56,7 @@ public class ArrayDeque<T> {
 
         /* Add thing to the last. */
         item[size] = thing;
+        size++;
     }
 
     public boolean isEmpty() {
@@ -98,6 +100,7 @@ public class ArrayDeque<T> {
         } else {
             T result = item[size];
             item[size] = null;
+            size--;
 
             /* Decrease the size if needed. */
             deSize();
@@ -107,7 +110,7 @@ public class ArrayDeque<T> {
     }
 
     public T get(int i) {
-        if (0 < i && i < size) {
+        if (0 <= i && i < size) {
             return item[i];
         } else {
             return null;
