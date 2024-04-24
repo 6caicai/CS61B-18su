@@ -1,19 +1,19 @@
 
-public class ArrayDeque<Type> {
+public class ArrayDeque<T> {
 
     /** Basic attribute of ArrayDeque. */
-    private Type[] item;
+    private T[] item;
     private int size;
 
     /** Create an empty ArrayDeque. */
     public ArrayDeque() {
-        item = (Type[]) new Object[32];
+        item = (T[]) new Object[32];
         size = 0;
     }
 
     /** Resize the ArrayDeque. */
     public void reSize(int capacity) {
-        Type[] tmp = (Type[]) new Object[capacity];
+        T[] tmp = (T[]) new Object[capacity];
         System.arraycopy(item, 0, tmp, 0, size);
         item = tmp;
     }
@@ -30,7 +30,7 @@ public class ArrayDeque<Type> {
         }
     }
 
-    public void addFirst(Type thing) {
+    public void addFirst(T thing) {
 
         /* Increase size to double if Array is full. */
         if (size == item.length) {
@@ -46,7 +46,7 @@ public class ArrayDeque<Type> {
         item[0] = thing;
     }
 
-    public void addLast(Type thing) {
+    public void addLast(T thing) {
 
         /* Increase size to double if Array is full. */
         if (size == item.length) {
@@ -72,11 +72,11 @@ public class ArrayDeque<Type> {
         System.out.println();
     }
 
-    public Type removeFirst() {
+    public T removeFirst() {
         if (size == 0){
             return null;
         } else {
-            Type result = item[0];
+            T result = item[0];
             size--;
 
             /* Move everything foreword. */
@@ -92,11 +92,11 @@ public class ArrayDeque<Type> {
         }
     }
 
-    public Type removeLast() {
+    public T removeLast() {
         if (size == 0) {
             return null;
         } else {
-            Type result = item[size];
+            T result = item[size];
             item[size] = null;
 
             /* Decrease the size if needed. */
@@ -106,7 +106,7 @@ public class ArrayDeque<Type> {
         }
     }
 
-    public Type get(int i) {
+    public T get(int i) {
         if (0 < i && i < size) {
             return item[i];
         } else {

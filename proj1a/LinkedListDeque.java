@@ -8,14 +8,7 @@ public class LinkedListDeque<T> {
 
     private LinkedListDeque next;
 
-    /**
-     * Construct a LinkedListDeque element.
-     */
-    public LinkedListDeque(LinkedListDeque<T> prev0, T current0, LinkedListDeque<T> next0) {
-        prev = prev0;
-        current = current0;
-        next = next0;
-    }
+
 
 
     /**
