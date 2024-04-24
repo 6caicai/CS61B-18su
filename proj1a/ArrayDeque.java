@@ -38,7 +38,7 @@ public class ArrayDeque<Type> {
         }
 
         /* Move everything to one step after. */
-        for (int i = size; i > 0; i -- ) {
+        for (int i = size; i > 0; i--) {
             item[i] = item[i-1];
         }
 
@@ -66,7 +66,7 @@ public class ArrayDeque<Type> {
     }
 
     public void printDeque() {
-        for (int i = 0; i < size; i ++ ) {
+        for (int i = 0; i < size; i++) {
             System.out.print(item[i]);
         }
         System.out.println();
@@ -80,7 +80,7 @@ public class ArrayDeque<Type> {
             size--;
 
             /* Move everything foreword. */
-            for (int i = 0; i < size; i ++ ) {
+            for (int i = 0; i < size; i++) {
                 item[i] = item[i+1];
             }
 
