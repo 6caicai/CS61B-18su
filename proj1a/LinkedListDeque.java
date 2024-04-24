@@ -1,119 +1,131 @@
-/**  first part of project1A.
- *   Deque implemented by Linked List
- *  @author FlyingPig
- */
 public class LinkedListDeque<T> {
-    /** inner class Node. */
-    public class Node {
-        /** the item stored on this node. */
-        private T item;
-        /** the Node before this Node. **/
-        private Node pre;
-        /** the Node after this Node. **/
-        private Node next;
 
-        /** constructor for Node. */
-        public Node(T n, Node ppre, Node nnext) {
-            item = n;
-            pre = ppre;
-            next = nnext;
-        }
+    private LinkedListDeque prev;
 
-        /** constructor for Node.(especially for sentinel node). */
-        public Node(Node ppre, Node nnext) {
-            pre = ppre;
-            next = nnext;
-        }
+    private T current;
+
+    private int size = 0;
+
+    private LinkedListDeque next;
+
+
+
+
+
+    /**
+     * The very FIRST element in deque.
+     */
+    private static LinkedListDeque FIRST;
+
+    /**
+     * The very LAST element in deque.
+     */
+    private static LinkedListDeque LAST;
+
+    /* put the First and the Last together. */
+    static {
+        FIRST = new LinkedListDeque();
+        LAST = new LinkedListDeque();
+        FIRST.next = LAST;
+        LAST.next = FIRST;
     }
 
-    /** sentinel node. */
-    private Node sentinel;
-    /** size of the deque. */
-    private int size;
-
-    /** constructor for deque. */
     public LinkedListDeque() {
-        sentinel = new Node(null, null);
-        sentinel.pre = sentinel;
-        sentinel.next = sentinel;
-        size = 0;
+        prev = FIRST;
+        current = null;
+        next = LAST;
     }
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
+    /** return size of the given LinkListDeque. */
     public int size() {
         return size;
     }
 
+    public T get(int index) {
+        if (index > 0 && size > index) {
+            LinkedListDeque ptr = FIRST.next;
+            for (int i = 0; i < index; i++) {
+                ptr = ptr.next;
+            }
+            return (T) ptr.current;
+        } else {
+            return null;
+        }
+    }
+
+
+    /** Prints the items in the deque from first to last, separated by a space. */
+    public void printDeque() {
+        LinkedListDeque ptr = FIRST.next;
+        for (int i = 0; i < size; i++) {
+            System.out.print(ptr.current);
+            System.out.print(" ");
+            ptr = ptr.next;
+        }
+        System.out.println();
+    }
+
+
+
+    /** add item of T "T" to the first. */
     public void addFirst(T item) {
-        Node newList = new Node(item, sentinel, sentinel.next);
-        sentinel.next.pre = newList;
-        sentinel.next = newList;
-        size++;
+        LinkedListDeque newNode =  new LinkedListDeque();
+        newNode.current = item;
+        newNode.next = FIRST.next;
+        newNode.prev = FIRST;
+        size += 1;
+        FIRST.next.prev = newNode;
+        FIRST.next = newNode;
     }
 
     public void addLast(T item) {
-        Node newList = new Node(item, sentinel.pre, sentinel);
-        sentinel.pre.next = newList;
-        sentinel.pre = newList;
-        size++;
+        LinkedListDeque newNode = new LinkedListDeque();
+        size += 1;
+        newNode.current = item;
+        newNode.prev = LAST.prev;
+        newNode.next = LAST;
+        LAST.prev.next = newNode;
+        LAST.prev = newNode;
     }
 
+    /** remove the first item. */
     public T removeFirst() {
-        if (size == 0) {
+        if (isEmpty()) {
             return null;
+        } else {
+            T result = (T) FIRST.next.current;
+            LinkedListDeque ptr = FIRST.next.next;
+            FIRST.next = ptr;
+            ptr.prev = FIRST;
+            size -= 1;
+            return result;
         }
-        T ret = sentinel.next.item;
-        sentinel.next.next.pre = sentinel;
-        sentinel.next = sentinel.next.next;
-        size--;
-        return ret;
     }
 
     public T removeLast() {
         if (size == 0) {
             return null;
-        }
-        T ret = sentinel.pre.item;
-        sentinel.pre.pre.next = sentinel;
-        sentinel.pre = sentinel.pre.pre;
-        size--;
-        return ret;
-    }
-
-    public T get(int index) {
-        if (index >= size) {
-            return null;
-        }
-        Node ptr = sentinel;
-        for (int i = 0; i <= index; i++) {
-            ptr = ptr.next;
-        }
-        return ptr.item;
-    }
-
-    private T getRecursiveHelp(Node start, int index) {
-        if (index == 0) {
-            return start.item;
         } else {
-            return getRecursiveHelp(start.next, index - 1);
+            T result = (T) LAST.prev.current;
+            LinkedListDeque ptr = LAST.prev.prev;
+            ptr.next = LAST;
+            LAST.prev = ptr;
+            size -= 1;
+            return result;
         }
+    }
+
+    public boolean isEmpty() {
+        return (size == 0);
     }
 
     public T getRecursive(int index) {
-        if (index >= size) {
-            return null;
-        }
-        return getRecursiveHelp(sentinel.next, index);
-    }
-
-    public void printDeque() {
-        Node ptr = sentinel.next;
-        while (ptr != sentinel) {
-            System.out.print(ptr.item + " ");
-            ptr = ptr.next;
+        LinkedListDeque tmp = this;
+        if (index == 0) {
+            return (T) FIRST.next.current;
+        } else {
+            tmp = tmp.next;
+            return (T) tmp.getRecursive(index - 1);
         }
     }
 }
