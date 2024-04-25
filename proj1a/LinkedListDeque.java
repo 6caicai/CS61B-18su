@@ -2,7 +2,7 @@
 public class LinkedListDeque<T> {
 
     /** the naked part. */
-    private class Node{
+    private class Node {
         private T item;
         private Node prev;
         private Node next;
@@ -34,7 +34,7 @@ public class LinkedListDeque<T> {
                 ptr = ptr.next;
             }
             return ptr.item;
-        } else{
+        } else {
             return null;
         }
     }
@@ -86,7 +86,10 @@ public class LinkedListDeque<T> {
         System.out.println();
     }
 
-    public T removeFirst(){
+    public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
         Node a = sentinel.next;
         T result = a.item;
         sentinel.next = a.next;
@@ -96,7 +99,10 @@ public class LinkedListDeque<T> {
         return result;
     }
 
-    public T removeLast(){
+    public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
         Node a = sentinel.prev;
         T result = a.item;
         sentinel.prev = a.prev;
