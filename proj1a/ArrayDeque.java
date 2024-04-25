@@ -82,11 +82,11 @@ public class ArrayDeque<T> {
             T result = item[0];
 
             /* Move everything foreword. */
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < size - 1; i++) {
                 item[i] = item[i + 1];
             }
 
-            item[size] = null;
+            item[size - 1] = null;
             size--;
 
             /* Decrease the size if needed. */
