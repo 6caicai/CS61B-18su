@@ -26,7 +26,7 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-    /**return the i th thing of the deque. */
+    /** return the i th thing of the deque. */
     public T get(int index) {
         if (index >= 0 && index < size) {
             Node ptr = sentinel.next;
@@ -37,6 +37,22 @@ public class LinkedListDeque<T> {
         } else{
             return null;
         }
+    }
+
+    private T getRecursiveHelper(int index, Node T) {
+        if (index == 0) {
+            return T.item;
+        } else {
+            return getRecursiveHelper(index - 1, T.next);
+        }
+    }
+
+    /** get but recursion. */
+    public T getRecursive(int index) {
+        if (index > size) {
+            return null;
+        }
+        return getRecursiveHelper(index, sentinel.next);
     }
 
     public void addFirst(T item) {
