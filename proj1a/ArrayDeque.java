@@ -27,7 +27,7 @@ public class ArrayDeque<T> {
     /** Decrease size of the ArrayDeque until size greater than a quarter of item length. */
     private void deSize() {
         while (size < item.length / 4) {
-            reSize(size / 2);
+            reSize(item.length / 2);
         }
     }
 
@@ -70,7 +70,7 @@ public class ArrayDeque<T> {
 
     public void printDeque() {
         for (int i = 0; i < size; i++) {
-            System.out.print(item[i]);
+            System.out.print(item[i] + " ");
         }
         System.out.println();
     }
@@ -80,12 +80,14 @@ public class ArrayDeque<T> {
             return null;
         } else {
             T result = item[0];
-            size--;
 
             /* Move everything foreword. */
             for (int i = 0; i < size; i++) {
                 item[i] = item[i + 1];
             }
+
+            item[size] = null;
+            size--;
 
             /* Decrease the size if needed. */
             deSize();
@@ -99,8 +101,8 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         } else {
-            T result = item[size];
-            item[size] = null;
+            T result = item[size - 1];
+            item[size - 1] = null;
             size--;
 
             /* Decrease the size if needed. */
