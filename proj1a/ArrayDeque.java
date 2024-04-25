@@ -3,6 +3,7 @@ public class ArrayDeque<T> {
 
     /** Basic attribute of ArrayDeque. */
     private T[] item;
+
     private int size;
 
     /** Create an empty ArrayDeque. */
