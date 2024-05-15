@@ -15,19 +15,22 @@ public class TestPalindrome {
         }
         assertEquals("persiflage", actual);
     }
+
     @Test
     public void testIsPalindrome() {
-        assertFalse(palindrome.isPalindrome("cat"));
-        
-        assertTrue(palindrome.isPalindrome("noon"));
         assertTrue(palindrome.isPalindrome(""));
+        assertTrue(palindrome.isPalindrome("a"));
+        assertTrue(palindrome.isPalindrome("aba"));
+        assertTrue(palindrome.isPalindrome("aaccbbbccaa"));
+
+        assertFalse(palindrome.isPalindrome("ab"));
+        assertFalse(palindrome.isPalindrome("ababba"));
     }
 
     @Test
-    public void testIsGeneralPalindrome() {
+    public void testIsOffByOnePalindrome() {
         CharacterComparator cc = new OffByOne();
         assertTrue(palindrome.isPalindrome("flake", cc));
-        assertFalse(palindrome.isPalindrome("dmcIsDump", cc));
-
+        assertFalse(palindrome.isPalindrome("aba", cc));
     }
 }
