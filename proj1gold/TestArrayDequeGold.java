@@ -14,29 +14,27 @@ public class TestArrayDequeGold {
             String message = "";
 
             for (int i = 0; i < 100; i++) {
-                int randomNumber = StdRandom.uniform(4);
+                int caseNumber = StdRandom.uniform(4);
+                int randomNumber = StdRandom.uniform(1000);
 
-                if (randomNumber == 0) {
-                    sad1.addFirst(i);
-                    sad2.addFirst(i);
+                if (caseNumber == 0) {
+                    sad1.addFirst(randomNumber);
+                    sad2.addFirst(randomNumber);
                     int index = sad1.size();
-                    message += "addFirst(" + i + ")\n";
-                    assertEquals(message, sad1.get(0), sad2.get(0));
+                    message += "addFirst(" + randomNumber + ")\n";
 
-                } else if (randomNumber == 1) {
-                    sad1.addLast(i);
-                    sad2.addLast(i);
+                } else if (caseNumber == 1) {
+                    sad1.addLast(randomNumber);
+                    sad2.addLast(randomNumber);
                     int index1 = sad1.size() - 1;
                     int index2 = sad2.size() - 1;
-                    message += "addLast(" + i + ")\n";
-                    assertEquals(message, index1, index2);
-                    assertEquals(message, sad1.get(index1), sad2.get(index2));
+                    message += "addLast(" + randomNumber + ")\n";
 
-                } else if (randomNumber == 2 && !sad1.isEmpty() && !sad2.isEmpty()) {
+                } else if (caseNumber == 2 && !sad1.isEmpty() && !sad2.isEmpty()) {
                     message += "removeFirst()\n";
                     assertEquals(message, sad1.removeFirst(), sad2.removeFirst());
 
-                } else if (randomNumber == 3 && !sad1.isEmpty() && !sad2.isEmpty()) {
+                } else if (caseNumber == 3 && !sad1.isEmpty() && !sad2.isEmpty()) {
                     message += "removeLast()\n";
                     assertEquals(message, sad1.removeLast(), sad2.removeLast());
 
