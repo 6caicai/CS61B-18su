@@ -1,7 +1,4 @@
 import java.util.Formatter;
-import java.util.Arrays;
-import java.util.Collections;
-
 
 /**
  * A naked recursive list of integers, similar to what we saw in lecture 3, but
@@ -14,11 +11,11 @@ public class IntList {
     /**
      * First element of list.
      */
-    public int first;
+    private int first;
     /**
      * Remaining elements of list.
      */
-    public IntList rest;
+    private IntList rest;
 
     /**
      * A List with first FIRST0 and rest REST0.
@@ -32,7 +29,7 @@ public class IntList {
      * A List with null rest, and first = 0.
      */
     public IntList() {
-    /* NOTE: public IntList () { }  would also work. */
+        /* NOTE: public IntList () { }  would also work. */
         this(0, null);
     }
 
@@ -84,12 +81,11 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        if (A == null){
+        if (A == null) {
             return B;
         }
         IntList ptr = A;
-        while (ptr.rest != null){
+        while (ptr.rest != null) {
             ptr = ptr.rest;
         }
         ptr.rest = B;
@@ -101,10 +97,10 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        if(A == null){
+        if (A == null) {
             return B;
         }
-        if(A.rest == null){
+        if (A.rest == null) {
             return new IntList(A.first, B);
         }
         return new IntList(A.first, catenate(A.rest, B));
@@ -112,8 +108,8 @@ public class IntList {
 
 
     /** Counts the length of given IntList. */
-    public static int count(IntList A){
-        if (A == null){
+    public static int count(IntList A) {
+        if (A == null) {
             return 0;
         } else if (A.rest == null) {
             return 1;
@@ -124,10 +120,10 @@ public class IntList {
 
 
     /** Convert IntList to an array. */
-    public static Integer[] IntListToArray(IntList A){
+    public static Integer[] IntListToArray(IntList A) {
         int length = count(A);
         Integer[] result = new Integer[length];
-        for (int i = 0; i < length; i++){
+        for (int i = 0; i < length; i++) {
             result[i] = A.first;
             A = A.rest;
         }
